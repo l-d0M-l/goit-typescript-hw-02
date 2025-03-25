@@ -31,7 +31,6 @@ function App() {
   };
 
   function searchImages(searchInfo) {
-    console.log(searchInfo);
     setSearchedQuery(searchInfo);
     setPage(1);
     setArticles([]);
@@ -50,7 +49,6 @@ function App() {
         setIsLoading(true);
         setError(false);
         const { results, hasMore } = await fetchData(searchedQuery, page);
-        console.log(results);
         setHasMore(hasMore);
         setArticles((prevArticles) => {
           return [...prevArticles, ...results];

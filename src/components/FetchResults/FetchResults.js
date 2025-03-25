@@ -10,7 +10,6 @@ export const fetchData = async (searchedQuery, page) => {
         client_id: "oV-SR7oduFjhBdx6mxZBN0X7sjzTcn0Pdxqy0dROVEk",
       },
     });
-    console.log(response.data, "asasas");
     const hasMorePages = page < response.data.total_pages;
     return {
       results: response.data.results,
