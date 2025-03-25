@@ -1,0 +1,36 @@
+.loadMoreBtn {
+  /* Основные стили */
+  display: block;
+  margin: 20px auto;
+  padding: 6px 12px;
+  font-size: 12px;
+
+  /* Стиль как у инпута */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+
+  /* Интерактивность */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+
+  /* Убираем дефолтные стили */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.loadMoreBtn:hover {
+    border-color: #4e7bec;
+    box-shadow: 0 0 0 3px rgba(78, 123, 236, 0.2);
+}
+
+/* .loadMoreBtn:focus {
+  border-color: #4e7bec;
+  box-shadow: 0 0 0 3px rgba(78, 123, 236, 0.2);
+} */
+
+.loadMoreBtn:active {
+  transform: translateY(1px);
+}
