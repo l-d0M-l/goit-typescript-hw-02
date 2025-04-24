@@ -1,11 +1,16 @@
 import css from "./ImageModal.module.css";
 
 import Modal from "react-modal";
-import { useEffect } from "react";
-
+import React, { useEffect } from "react";
+import ImageI from "../App/AppTypes";
 Modal.setAppElement("#root");
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  image: ImageI | null;
+}
 
-function ImageModal({ isOpen, onClose, image }) {
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image }) => {
   if (!isOpen || !image) return null;
   return (
     <Modal
@@ -36,15 +41,12 @@ function ImageModal({ isOpen, onClose, image }) {
             borderRadius: "8px",
           }}
         />
-        <button
-          onClick={onClose}
-          className={css.closeButton}
-        >
+        <button onClick={onClose} className={css.closeButton}>
           ×
         </button>
       </div>
     </Modal>
   );
-}
+};
 
 export default ImageModal;

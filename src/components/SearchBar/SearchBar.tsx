@@ -1,15 +1,19 @@
 import css from "./SearchBar.module.css";
 import { CiSearch } from "react-icons/ci";
 import toast, { Toaster } from "react-hot-toast";
-import { useRef } from "react";
+import React, { useRef, MouseEvent } from "react";
 
-function SearchBar({ onSearch }) {
-  const inputRef = useRef();
-  function handleClick(e) {
+interface SearchBarProps {
+  onSearch: (searchInfo: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  function handleClick(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     //show the error message if the message is blank
-    if (inputRef.current.value.trim().length === 0) {
+    if (inputRef.current?.value.trim().length === 0) {
       toast.error("You have to enter something!", {
         position: "top-left",
         style: {
@@ -22,8 +26,10 @@ function SearchBar({ onSearch }) {
       inputRef.current.value = ""; //clear the input after
       return;
     }
-    onSearch(inputRef.current.value);
-    inputRef.current.value = ""; //clear the input after
+    if (inputRef.current) {
+      onSearch(inputRef.current.value);
+      inputRef.current.value = ""; //clear the input after
+    }
   }
   return (
     <header className={css.searchBar}>
@@ -34,13 +40,13 @@ function SearchBar({ onSearch }) {
           placeholder="Search photos and images"
           ref={inputRef}
         />
-        <button type="sumbit" className={css.searchBtn} onClick={handleClick}>
+        <button type="submit" className={css.searchBtn} onClick={handleClick}>
           <CiSearch className={css.searchIcon} size="18" />
         </button>
       </form>
       <Toaster />
     </header>
   );
-}
+};
 
 export default SearchBar;

@@ -1,44 +1,55 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import SearchBar from "../SearchBar/SearchBar";
 import { fetchData } from "../FetchResults/FetchResults";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 import css from "./App.module.css";
+
 import { MoonLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 import ImageModal from "../ImageModal/ImageModal";
+import ImageI from "./AppTypes";
+// interface of photos we get from backend
+// interface Image {
+//   url: string;
+//   id: number;
+//   [key: string]: any;
+// }
 
 function App() {
-  const [searchedQuery, setSearchedQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [hasMore, setHasMore] = useState();
-  //for modal window
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchedQuery, setSearchedQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
 
-  const handleImageClick = (image) => {
+  const [articles, setArticles] = useState<ImageI[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(false);
+  //for modal window
+
+  const [selectedImage, setSelectedImage] = useState<ImageI | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleImageClick = (image: ImageI): void => {
     setSelectedImage(image);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
 
-  function searchImages(searchInfo) {
+  const searchImages = (searchInfo: string): void => {
     setSearchedQuery(searchInfo);
     setPage(1);
     setArticles([]);
-  }
+  };
 
-  function loadMore() {
+  const loadMore = (): void => {
     setPage(page + 1);
-  }
+  };
+
   useEffect(() => {
     // do not fetch at first try
     if (!searchedQuery) return;

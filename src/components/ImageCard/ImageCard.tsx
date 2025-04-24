@@ -1,6 +1,12 @@
 import css from "./ImageCard.module.css";
+import ImageI from "../App/AppTypes";
+import React from "react";
+interface ImageCardProps {
+  cardInfo: ImageI;
+  onImageClick: (image: ImageI) => void;
+}
 
-function ImageCard({ cardInfo, onImageClick }) {
+const ImageCard: React.FC<ImageCardProps> = ({ cardInfo, onImageClick }) => {
   return (
     //select the clicked image for modal
     <div onClick={() => onImageClick(cardInfo)}>
@@ -11,6 +17,6 @@ function ImageCard({ cardInfo, onImageClick }) {
       />
     </div>
   );
-}
+};
 
 export default ImageCard;
