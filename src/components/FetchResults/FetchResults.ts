@@ -1,18 +1,18 @@
 import axios, { AxiosError } from "axios";
-
-interface Photo {
-  id: string;
-  urls: {
-    small: string;
-    regular: string;
-    full: string;
-  };
-  description: string | null;
-  alt_description: string | null;
-}
+import ImageI from "../App/AppTypes";
+// interface Photo {
+//   id: string;
+//   urls: {
+//     small: string;
+//     regular: string;
+//     full: string;
+//   };
+//   description: string | null;
+//   alt_description: string | null;
+// }
 
 interface FetchDataResponse {
-  results: Photo[]; // aray of pictures
+  results: ImageI[]; // aray of pictures
   hasMore: boolean; // check for more pages
 }
 
