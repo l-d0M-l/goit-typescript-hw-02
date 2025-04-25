@@ -16,19 +16,28 @@ interface FetchDataResponse {
   hasMore: boolean; // check for more pages
 }
 
+interface ResponseData {
+  total_pages: number;
+  results: ImageI[];
+}
+
 export const fetchData = async (
   searchedQuery: string,
   page: number
 ): Promise<FetchDataResponse> => {
   try {
-    const response = await axios.get("https://api.unsplash.com/search/photos", {
-      params: {
-        query: searchedQuery,
-        page: page,
-        per_page: 12,
-        client_id: "oV-SR7oduFjhBdx6mxZBN0X7sjzTcn0Pdxqy0dROVEk",
-      },
-    });
+    const response = await axios.get<ResponseData>(
+      "https://api.unsplash.com/search/photos",
+      {
+        params: {
+          query: searchedQuery,
+          page: page,
+          per_page: 12,
+          client_id: "oV-SR7oduFjhBdx6mxZBN0X7sjzTcn0Pdxqy0dROVEk",
+        },
+      }
+    );
+    console.log(response);
     const hasMorePages = page < response.data.total_pages;
     return {
       results: response.data.results,
